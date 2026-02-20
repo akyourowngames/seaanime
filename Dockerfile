@@ -6,7 +6,7 @@ RUN cd seanime-web && npm install && npm run build
 FROM golang:1.26 AS builder
 WORKDIR /app
 COPY . .
-RUN rm -rf web && mkdir -p web && cp -r /src/seanime-web/out/* web/
+COPY --from=webbuilder /src/seanime-web/out ./web
 RUN go mod download
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o seanime .
 
