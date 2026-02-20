@@ -16,4 +16,4 @@ WORKDIR /app
 COPY --from=builder /app/seanime /app/seanime
 ENV PORT=10000
 EXPOSE 10000
-CMD ["/app/seanime"]
+CMD ["/bin/sh", "-c", "/app/seanime --host 0.0.0.0 --port ${PORT:-10000}"]
